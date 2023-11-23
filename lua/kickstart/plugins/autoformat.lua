@@ -66,6 +66,13 @@ return {
                 return c.id == client.id
               end,
             }
+            vim.lsp.buf.code_action {
+              context = {
+                source = { organizeImports = true },
+                only = { "source.organizeImports" },
+              },
+              apply = true,
+            }
           end,
         })
       end,
