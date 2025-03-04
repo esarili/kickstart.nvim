@@ -230,6 +230,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
+-- Set file type to helm when file is under a chart folder
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  desc = 'Set file type to helm when file is under a chart folder',
+  pattern = { '*/chart/*.yaml', '*/chart/*.yml' },
+  command = 'set filetype=helm',
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
