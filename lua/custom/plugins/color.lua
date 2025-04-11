@@ -1,6 +1,12 @@
 return {
-  'navarasu/onedark.nvim',
+  -- 'rebelot/kanagawa.nvim',
+  -- config = function()
+  --   require('kanagawa').load()
+  -- end,
+  'neanias/everforest-nvim',
   config = function()
-    require('onedark').load()
+    local everforest = require 'everforest'
+    everforest.config.background = 'hard'
+    everforest.load()
   end,
 }
