@@ -694,12 +694,24 @@ require('lazy').setup({
         mode = '',
         desc = '[F]ormat buffer',
       },
+      {
+        '<leader>tf',
+        function()
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          vim.notify('Autoformat ' .. (vim.b.disable_autoformat and 'disabled' or 'enabled'), vim.log.levels.INFO)
+        end,
+        desc = '[T]oggle auto[f]ormat',
+      },
     },
     ---@module 'conform'
     ---@type conform.setupOpts
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        -- Disable for the current buffer by running: lua vim.b.disable_autoformat = true
+        if vim.b[bufnr].disable_autoformat then
+          return nil
+        end
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
